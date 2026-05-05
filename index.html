@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenSaaSApps — Managed Open-Source Software Platform</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+    }
+
+    .logo { font-weight: 800; color: var(--primary-dark); }
+    .logo span { color: var(--text); }
+
+    .nav-links { display: flex; gap: 1rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
+
+    section { padding: 4rem 0; }
+
+    .hero {
+      padding-top: 5rem;
+      text-align: center;
+      background: linear-gradient(180deg, #eff6ff 0%, rgba(239, 246, 255, 0) 100%);
+    }
+
+    h1 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; margin: 0 0 1rem; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 0 0 1.2rem; }
+    p.lead { font-size: 1.1rem; color: var(--muted); max-width: 760px; margin: 0 auto 1.75rem; }
+
+    .btn-row { display: flex; justify-content: center; gap: .8rem; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: .72rem 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { border-color: var(--border); color: var(--text); background: #fff; }
+
+    .grid { display: grid; gap: 1rem; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem 1.1rem;
+    }
+
+    .section-sub { color: var(--muted); margin: 0 0 1.6rem; }
+
+    ul.clean { margin: .3rem 0 0; padding-left: 1.1rem; }
+
+    .steps { counter-reset: step; display: grid; gap: .8rem; }
+    .step { display: flex; gap: .7rem; align-items: flex-start; }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      background: #dbeafe;
+      color: #1e3a8a;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .badge { font-size: .8rem; padding: .2rem .5rem; border-radius: 999px; font-weight: 700; }
+    .running { background: #dcfce7; color: #166534; }
+    .updating { background: #fef3c7; color: #92400e; }
+    .error { background: #fee2e2; color: #991b1b; }
+
+    .tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 10px;
+      padding: .5rem .8rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .tab-btn.active { background: #dbeafe; border-color: #bfdbfe; color: #1e3a8a; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: .95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">Open<span>SaaSApps</span></div>
+      <nav class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#platform">Platform</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Open-source power, delivered with SaaS simplicity.</h1>
+      <p class="lead">We host, manage, and support open-source business tools so you don’t have to deal with setup, DevOps, or maintenance.</p>
+      <div class="btn-row">
+        <a href="#platform" class="btn btn-primary">Get Started</a>
+        <a href="#tools" class="btn btn-outline">View Supported Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Why OpenSaaSApps</h2>
+      <p class="section-sub">The flexibility of open source with the reliability and ease of managed SaaS operations.</p>
+      <div class="grid grid-3">
+        <article class="card"><h3>Open Source Freedom</h3><ul class="clean"><li>Flexible tools</li><li>No vendor lock-in</li><li>Transparent systems</li></ul></article>
+        <article class="card"><h3>SaaS Convenience</h3><ul class="clean"><li>Fully managed hosting</li><li>Automatic updates</li><li>One-click access</li></ul></article>
+        <article class="card"><h3>Human Support</h3><ul class="clean"><li>Setup assistance</li><li>Troubleshooting help</li><li>Ongoing operations support</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="card steps">
+        <div class="step">Choose a tool (Mautic, CRM, ERP, analytics, and more).</div>
+        <div class="step">We deploy and configure it for your team.</div>
+        <div class="step">You start using it immediately.</div>
+        <div class="step">We manage everything in the background.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="container">
+      <h2>Supported tools</h2>
+      <div class="grid grid-4">
+        <article class="card"><h3>Mautic</h3><p><strong>What it does:</strong> Email marketing automation and campaigns.</p><p><strong>What we manage:</strong> Hosting, upgrades, deliverability config, backups.</p></article>
+        <article class="card"><h3>CRM Tools</h3><p><strong>What it does:</strong> Customer pipeline and relationship management.</p><p><strong>What we manage:</strong> Deployment, SSO, integrations, admin support.</p></article>
+        <article class="card"><h3>ERP Systems</h3><p><strong>What it does:</strong> Business operations, finance, inventory, workflows.</p><p><strong>What we manage:</strong> Infrastructure, security hardening, optimization.</p></article>
+        <article class="card"><h3>Analytics Dashboards</h3><p><strong>What it does:</strong> Reporting and data visualization.</p><p><strong>What we manage:</strong> Data connectors, uptime, performance tuning.</p></article>
+        <article class="card"><h3>Communication Tools</h3><p><strong>What it does:</strong> Team communication and collaboration.</p><p><strong>What we manage:</strong> Provisioning, auth setup, ongoing maintenance.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <h2>Services</h2>
+      <div class="card">
+        <ul class="clean">
+          <li>Hosting & Infrastructure Management</li>
+          <li>SSL & Domain Setup</li>
+          <li>SSO / Authentication Setup</li>
+          <li>Data Migration Services</li>
+          <li>Security & Compliance Setup</li>
+          <li>Ongoing Support & Maintenance</li>
+          <li>"We help you use the software" support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <h2>Pricing</h2>
+      <div class="grid grid-3">
+        <article class="card"><h3>Starter</h3><ul class="clean"><li>Hosting only</li><li>Basic support</li></ul></article>
+        <article class="card"><h3>Pro</h3><ul class="clean"><li>Hosting + setup + maintenance</li><li>Priority support</li></ul></article>
+        <article class="card"><h3>Enterprise</h3><ul class="clean"><li>Full managed operations</li><li>Dedicated support engineer</li><li>Custom integrations</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container card" style="text-align:center;">
+      <h2>Run open-source software like SaaS—without the operational burden.</h2>
+      <div class="btn-row">
+        <a href="#" class="btn btn-primary">Start Free Trial</a>
+        <a href="#" class="btn btn-outline">Talk to an Expert</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="platform">
+    <div class="container">
+      <h2>Platform Preview</h2>
+      <p class="section-sub">Click a button, we handle the complexity, and your team just uses the software.</p>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="my-tools">My Tools Dashboard</button>
+        <button class="tab-btn" data-tab="deploy">Deploy New Tool</button>
+        <button class="tab-btn" data-tab="requests">Service Requests</button>
+        <button class="tab-btn" data-tab="infra">Infrastructure Settings</button>
+        <button class="tab-btn" data-tab="billing">Billing</button>
+        <button class="tab-btn" data-tab="admin">Admin Panel</button>
+      </div>
+
+      <div id="my-tools" class="card panel active"><h3>My Tools</h3><p>Mautic <span class="badge running">Running</span> <button class="btn btn-outline">Access</button></p><p>ERP Suite <span class="badge updating">Updating</span> <button class="btn btn-outline">Access</button></p><p>CRM Pro <span class="badge error">Error</span> <button class="btn btn-outline">View Logs</button></p></div>
+      <div id="deploy" class="card panel"><h3>Deploy New Tool</h3><p>Select software from catalog, choose a plan, and click Deploy to provision infrastructure automatically.</p><button class="btn btn-primary">Deploy</button></div>
+      <div id="requests" class="card panel"><h3>Service Requests</h3><ul class="clean"><li>Setup help</li><li>Migration assistance</li><li>Integration requests</li><li>Troubleshooting tickets</li></ul></div>
+      <div id="infra" class="card panel"><h3>Infrastructure Settings</h3><ul class="clean"><li>Domain configuration</li><li>SSL status</li><li>Email settings</li><li>SSO configuration</li></ul></div>
+      <div id="billing" class="card panel"><h3>Billing</h3><ul class="clean"><li>Subscription plans</li><li>Add-on services</li><li>Usage-based charges</li><li>Invoice history</li></ul></div>
+      <div id="admin" class="card panel"><h3>Admin Panel (Internal)</h3><ul class="clean"><li>Manage deployments</li><li>View customer infrastructure</li><li>Handle service requests</li><li>Trigger migrations</li><li>Monitor system health</li></ul></div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 OpenSaaSApps — Managed open-source software operations.
+  </footer>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
