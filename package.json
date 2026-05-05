@@ -1,0 +1,9 @@
+{
+  "name": "opensaasapps-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OpenSaaSApps landing page and platform preview",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
